@@ -15,6 +15,11 @@ class UsersController < ApplicationController
       render :new, status: :unprocessable_entity
     end
   end
+  
+  def show
+    @user = User.find(params[:id])
+    @post_images = @user.post_images    
+  end
 
   private
  
