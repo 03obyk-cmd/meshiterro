@@ -1,4 +1,5 @@
 class UsersController < ApplicationController
+  before_action :is_matching_login_user, only: [:edit, :update]
   allow_unauthenticated_access only: [:new, :create] 
   
   def new
@@ -26,8 +27,8 @@ class UsersController < ApplicationController
   end
 
   def update
-    user = User.find(params[:id])
-    user.update(user_params)
+    @user = User.find(params[:id])
+    @user.update(user_params)
     redirect_to user_path(user.id)
   end
 
@@ -36,5 +37,12 @@ class UsersController < ApplicationController
   def user_params
     # name, email_address, password, password_confirmation を許可
     params.require(:user).permit(:name, :email_address, :password, :password_confirmation, :profile_image)
+  end
+
+  def is_matching_login_user
+    user = User.find(params[:id])
+    unless user.id == Current.user.id
+      redirect_to post_images_path
+    end
   end
 end
