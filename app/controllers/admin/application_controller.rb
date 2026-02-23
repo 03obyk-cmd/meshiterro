@@ -1,4 +1,4 @@
-class Admin::ApplicationController < ApplicationController::Base
+class Admin::ApplicationController < ActionController::Base
   layout 'admin'
   include Admin::Authentication
 
