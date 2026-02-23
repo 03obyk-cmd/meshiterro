@@ -1,4 +1,5 @@
 class Admin::ApplicationController < ApplicationController::Base
+  layout 'admin'
   include Admin::Authentication
 
   private

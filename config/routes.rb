@@ -2,8 +2,10 @@ Rails.application.routes.draw do
   # 管理者用
   namespace :admin do
     resource :session, only: [:new, :create, :destroy]
+    get 'dashboards', to: 'dashboards#index'
+    resources :users, only: [:destroy]
   end
-  
+
   resources :post_images, only: [:new, :create, :index, :show, :destroy] do
     resource :favorite, only: [:create, :destroy]
     resources :post_comments, only: [:create, :destroy]
